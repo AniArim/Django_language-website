@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    {% load static %}
+    {% load app_tags %}
+    <link href="{% static 'programmingLanguages/css/bootstrap.css' %}" rel="stylesheet">
+    <style>
+        #id_subcategories{
+            width: 100%;
+
+        }
+    </style>
+</head>
+
+<body style="background-color: #bfbfe1">
+    <script src="{% static 'programmingLanguages/js/bootstrap.bundle.js' %}" ></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{% static 'programmingLanguages/css/paginator.css' %}" rel="stylesheet">
+        <nav class="navbar" style="background-color: #540101; justify-content: right">
+            <div class="container-fluid">
+                <ul class="nav">
+                    <a class="navbar-brand" href="{% url 'main' %}">
+                {% get_logo as path %}
+                        <img class="img-fluid" src="../../../media/media/logo.png" height="40" width="60">
+                    </a>
+                {% get_menu as menu %}
+                {% for i in menu %}
+                    <li class="nav-item"><a class="nav-link active" style="color: cornsilk; font-size: larger" aria-current="page" href="{% url i.url_name %}">{{i.title}}</a></li>
+                {% endfor %}
+                </ul>
+                <div class="container-fluid" style="justify-content: right">
+                <ul class="nav" style="justify-content: right;">
+                        <form class="d-flex small" method="get" action="{% url 'search' %}">
+                            <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск" name="search">
+                            <button class="btn btn-outline-light" type="submit">Поиск</button>
+                        </form>
+                        {% if request.user.is_authenticated %}
+                        <span class="navbar-text" style="color: cornsilk; padding-left: 15px; font-size: large">{{user.first_name}}</span>
+                        <li class="nav-item" ><a class="nav-link active" style="color: cornsilk; font-size: large" href="{% url 'logout' %}">Выйти </a></li>
+                        {% else %}
+                        <li class="nav-item" ><a class="nav-link active" style="color: cornsilk; font-size: large" href="{% url 'login' %}">Войти </a></li>
+                        <li class="nav-item"><a class="nav-link active" style="color: cornsilk; font-size: large" href="{% url 'register' %}">Регистрация</a></li>
+                        {% endif %}
+                </ul>
+                </div>
+            </div>
+        </nav>
+    <!-- SideBar left-->
+    {% load cache %}
+    <div class="row">
+        <div class="col-sm-3"  style="background-color: ivory">
+                <div class="card">
+                    <div class="card-header" title="Навигация">
+                        <h3>Навигация по языкам</h3>
+                    </div>
+                </div>
+                {% cache 600 sidebar %}
+                {% for querySetObject in category %}
+                <div class="accordion" id="accordionNavBar">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id=heading{{querySetObject.name}}>
+                          <button class="accordion-button" style="background-color: #a41103; color: #fdfdef; border-block-color: crimson" type="button" data-bs-toggle="collapse" data-bs-target=#{{querySetObject.name}} aria-expanded="true" aria-controls={{querySetObject.name}}>
+                            {{querySetObject.name}}
+                          </button>
+                        </h2>
+                        <div id={{querySetObject.name}} class="accordion-collapse collapse show" aria-labelledby=heading{{querySetObject.name}} data-bs-parent="#accordionNavBar">
+                          <div class="accordion-body" style="background-color: #bfbfe1">
+
+                              {% for object in subcategory %}
+                              {% if object.cat_id == querySetObject.pk %}
+                                <div class="accordion" id="accordionSubNavBar">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id=heading{{object.name}}>
+                                          <button class="accordion-button" style="background-color: rgb(100,20,30); color: #fdfdef; height: 40px" type="button" data-bs-toggle="collapse" data-bs-target=#{{object.name}} aria-expanded="true" aria-controls={{object.name}}>
+                                            {{object.name}}
+                                          </button>
+                                        </h2>
+                                        <div id={{object.name}} class="accordion-collapse collapse hide" aria-labelledby=heading{{object.name}} data-bs-parent="#accordionSubNavBar">
+                                          <div class="accordion-body" style="background-color: #d6d6ec">
+                                            <ul class="list-group list-group-flush">
+                                                {% if object.name in listSubCat %}
+                                                    <a class="btn btn-outline-info" href="{{object.get_absolute_url}}" style="color: #ffffff; margin: 5px; background-color: #b2261a">Посмотреть все</a>
+                                                {% with object.language_set.all as list %}
+                                                    {% for item in list %}
+                                                    <li class="list-group-item" style="background-color: #a5c7e1">
+                                                        <a href="{{item.get_absolute_url}}" style="color: #b70116">{{item.title}}</a>
+                                                    </li>
+                                                {% endfor %}
+                                                {% endwith %}
+                                                {% endif %}
+
+                                            </ul>
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endcache %}
+        </div>
+        <div class="col-sm-9">
+                {% block content %}
+                {% endblock %}
+        </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+    $('#id_subcategories').select2({
+        placeholder: "Выберите категорию/и из списка",
+    });
+});
+
+    $('.captcha').click(function () {
+        $.getJSON("/captcha/refresh/", function (result) {
+            $('.captcha').attr('src', result['image_url']);
+            $('#id_captcha').val(result['key'])
+        });
+
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends 'programmingLanguages/base.html' %}
+{% load static %}
+{% load app_tags %}
+{% block content %}
+
+<div class="container-sm">
+    <div class= "card border-dark" style="padding: 10px; margin-block-end: 10px">
+        <div class="card-header border-danger">
+            <h1>{{title}}</h1>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <form method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="next" value="{{ next }}">
+                    {{form.media}}
+                    {% csrf_token %}
+                    <div class="form-error">{{form.non_field_errors}}</div>
+
+                    {% for item in form %}
+                    <label class="form-label" for='{{item.id_for_label}}' style="font-size: large">{{item.label}}: </label>
+                    <p>{{item}}</p>
+                    <div class="form-error" style="color: darkred">{{item.errors}}</div>
+                    {% endfor %}
+
+                    <button class="btn-lg btn-outline-dark" type="submit">{{button}}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

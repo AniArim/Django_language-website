@@ -1,0 +1,23 @@
+{% extends 'programmingLanguages/base.html' %}
+{% load static %}
+{% load app_tags %}
+{% block content %}
+
+<div class="container-sm">
+    <div class="card border-dark" style="padding: 10px; margin-block-end: 10px">
+        <div class="card-header border-danger">
+            <h1>{{title}}</h1>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <form method="post">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button class="btn-lg btn-outline-dark" type="submit">{{button}}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

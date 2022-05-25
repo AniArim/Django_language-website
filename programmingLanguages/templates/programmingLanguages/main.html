@@ -1,0 +1,40 @@
+{% extends 'programmingLanguages/base.html' %}
+{% load static %}
+{% load app_tags %}
+{% block content %}
+    <div class="container-sm">
+        <div class= "card border-dark" style="padding: 10px; margin-block-end: 10px">
+            <div class="card-header border-danger">
+                <h1>{{title}}</h1>
+            </div>
+                <h5 class="card-subtitle" style="text-align: right; padding: 10px">
+                    {% if subcat %}
+                    {% for line in subcat %}
+                    {{line.name}} |
+                    {% endfor %}
+                    {% endif %}
+                </h5>
+
+            <div class="card-body border-dark">
+                {% if icon %}
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <img  class="img-fluid shadow" src={{icon.url}} alt="{{title}}" height="250" width="250">
+                        </div>
+                        <div class="col">
+                            <div class="position-relative text-dark">
+                                {% autoescape off %}
+                                <h6>{{text|linebreaks|escape}}</h6>
+                                {% endautoescape %}
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    {% autoescape off %}
+                        <h6>{{text|linebreaks|escape}}</h6>
+                    {% endautoescape %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

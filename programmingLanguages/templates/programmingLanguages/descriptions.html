@@ -1,0 +1,94 @@
+{% extends 'programmingLanguages/base.html' %}
+{% load static %}
+{% load app_tags %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="content">
+                <div class="card border-dark mb-3" style="padding: 10px; text-align: center;">
+                    <div class="card-header">
+                        {% if currentCat %}
+                        <h3>{{title}}</h3> <h5 style="color: darkred"> {{currentCat}}</h5>
+                        {% else %}
+                        <h2>{{title}}</h2>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if not object_list%}
+                <div class="card border-dark"  style="padding: 10px; box-sizing: revert; height: 480px; margin-block-end: 10px">
+                    <h3 style="color: #bd081c; padding-left: 35%; margin-top: 5%"> Упс! Ничего не найдено!</h3>
+                    <img class="img-fluid" src="https://hyperhost.ua/info/storage/uploads/2020/04/search-gif-6-1.gif" style="margin-top: 50px; margin-left: 30%" height="350" width="550">
+                </div>
+                {% endif %}
+                {% for querySetObject in object_list %}
+                <div class= "card border-dark" style="padding: 10px; margin-block-end: 10px">
+                            <div class="card-header border-danger" title="{{querySetObject.title}}">
+                                <h2>{{querySetObject.title}}</h2>
+                            </div>
+                            <h6 class="card-subtitle" style="text-align: right; margin: 10px">
+
+                                {% for item in querySetObject.subcategories.all|slice:":1" %}
+                                    {% for element in category %}
+                                        {% if element.pk == item.cat_id %}
+                                            <p class="card-subtitle" style="text-align: right; margin: 10px">
+                                                {{element.name}} |
+                                            </p>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+
+                                {% for item in querySetObject.subcategories.all %}
+                                    <{{item.name}}>
+                                {% endfor %}
+
+                            </h6>
+                            <div class="card-body border-dark">
+                                <div class="row">
+                                        <div class="col-sm-2">
+                                            <img  class="img-fluid shadow left" src={{querySetObject.icon.url}} alt="{{querySetObject.title}}" height="250" width="250">
+                                        </div>
+                                        <div class="col">
+                                            <div class="position-static text-dark">
+                                                {% autoescape off %}
+                                                <h6>{{querySetObject.content|linebreaks|truncatewords:50|escape}}</h6>
+                                                {% endautoescape %}
+                                                <a class="btn btn-outline-dark .btn-block" href="{{ querySetObject.get_absolute_url }}" role="button">Читать далее</a>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                </div>
+                {% endfor %}
+
+                {% if page_obj.has_other_pages %}
+                <div class="card-footer border-dark" style="background-color: #fdfdef">
+                    <nav aria-label="Paginator">
+                          <ul class="pagination justify-content-center" >
+                              {% if page_obj.has_previous %}
+                              <li class="page-item"><a class="page-link" href="?search={{search}}&page={{ page_obj.previous_page_number }}">Предыдущая</a></li>
+                              {% else %}
+                              <li class="page-item disabled"><a class="page-link">Предыдущая</a></li>
+                              {% endif %}
+
+                              {% for page in paginator.page_range %}
+                              {% if page_obj.number == page %}
+                              <li class="page-item active"><span class="page-link">{{page}}</span>
+                              {% elif page >= page_obj.number|add:-3 and page <= page_obj.number|add:3 %}
+                              <li class="page-item"><a class="page-link" href="?search={{search}}&page={{ page }}">{{page}}</a></li>
+                              {% endif %}
+                              {% endfor %}
+
+                              {% if page_obj.has_next %}
+                              <li class="page-item"><a class="page-link" href="?search={{search}}&page={{ page_obj.next_page_number }}">Следующая</a></li>
+                              {% else %}
+                              <li class="page-item disabled"><a class="page-link">Следующая</a></li>
+                              {% endif %}
+                          </ul>
+                    </nav>
+                </div>
+                {% endif %}
+            </div>
+    </div>
+</div>
+{% endblock content %}

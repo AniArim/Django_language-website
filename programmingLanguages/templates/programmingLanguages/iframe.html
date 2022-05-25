@@ -1,0 +1,54 @@
+{% extends 'programmingLanguages/base.html' %}
+{% load static %}
+{% load app_tags %}
+{% block content %}
+<style>
+#iframe_table_block {
+overflow: hidden;
+width: 100%; /* Ширина окна */
+height: 1000px; /* Высота окна */
+}
+
+#iframe_table_class {
+border: 10px;
+margin-left: -20px; /* Положение по горизонтали */
+margin-top: -780px; /* Положение по вертикали */
+width: 100%;
+height: 200%;
+}
+
+#iframe_second_block {
+overflow: hidden;
+width: 100%; /* Ширина окна */
+height: 630px; /* Высота окна */
+}
+
+#iframe_second_class {
+border: 10px;
+margin-left: -20px; /* Положение по горизонтали */
+margin-top: -1780px; /* Положение по вертикали */
+width: 100%;
+height: 700%;
+}
+
+</style>
+
+    <div class= "card border-dark" style="padding: 10px; margin-block-end: 10px">
+        <div class="card-header border-danger">
+            <h1>{{title}}</h1>
+        </div>
+        <div class="card-body" style="background-color: #e8eef4; height: 1700px">
+            <div id="iframe_table_block">
+                <!--noindex--><iframe sandbox id="iframe_table_class" loading = "lazy" src="https://www.tiobe.com/tiobe-index/"  scrolling="no">
+                Ваш браузер не поддерживает iframe!
+                </iframe><!--/noindex-->
+            </div>
+            <div id="iframe_second_block" >
+                    <!--noindex--><iframe sandbox="allow-scripts"  id="iframe_second_class"  loading = "lazy" src="https://www.tiobe.com/tiobe-index/"  scrolling="no">
+                    Ваш браузер не поддерживает iframe!
+                    </iframe><!--/noindex-->
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
