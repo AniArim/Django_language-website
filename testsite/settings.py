@@ -174,10 +174,10 @@ CKEDITOR_CONFIGS = {
     'awesome_ckeditor': {
         'height': 400,
         'width': 1100,
-        'skin': 'moono-dark'
+
     },
     'default': {
-        'skin': 'prestige',
+
         'toolbar': 'full',
         'toolbar_Custom': [
             ['Blockquote', 'CodeSnippet'],
@@ -188,7 +188,7 @@ CKEDITOR_CONFIGS = {
     }
 }
 CKEDITOR_UPLOAD_PATH = 'uploads/'
-CKEDITOR_BASEPATH = "/staticfiles/ckeditor/ckeditor/"
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 INTERNAL_IPS = [
     '127.0.0.1',
