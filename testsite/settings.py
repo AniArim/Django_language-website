@@ -173,7 +173,7 @@ THUMBNAIL_FORMAT = 'PNG'
 CKEDITOR_CONFIGS = {
     'awesome_ckeditor': {
         'height': 400,
-        'width': 1100,
+        'width': 1000,
 
     },
     'default': {
