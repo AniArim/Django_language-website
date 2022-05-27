@@ -188,7 +188,7 @@ CKEDITOR_CONFIGS = {
     }
 }
 CKEDITOR_UPLOAD_PATH = 'uploads/'
-CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_BASEPATH = "/staticfiles/ckeditor/ckeditor/"
 
 INTERNAL_IPS = [
     '127.0.0.1',
