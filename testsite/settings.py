@@ -101,6 +101,19 @@ DATABASES = {
     }
 }
 
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'danig7dmo413j7',
+        'USER': 'qjicuvdqpzhggt',
+        'PASSWORD': '5f0a8a6134cc0e4c98303856067aaa678d297f637cd725cc8413360e283bb889',
+        'HOST': 'ec2-52-3-2-245.compute-1.amazonaws.com',
+        'PORT': '5432'
+    }
+}
+'''
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -175,6 +188,7 @@ CKEDITOR_CONFIGS = {
     }
 }
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 INTERNAL_IPS = [
     '127.0.0.1',
