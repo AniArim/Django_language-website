@@ -48,9 +48,10 @@ class SearchResult(DataMixin, ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['search'] = self.request.GET.get('search')
-        context['title'] = 'Результаты поиска'
-        return context
+        mixinContext = self.get_user_context(title='Результаты поиска',
+                                             search=self.request.GET.get('search'))
+
+        return dict(list(context.items()) + list(mixinContext.items()))
 
 
 class LanguageInSubCategoryShow(DataMixin, ListView):
