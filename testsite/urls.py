@@ -46,6 +46,5 @@ else:
             mediaserve, {'document_root': settings.STATIC_ROOT})
     ]
 
-handler404 = 'programmingLanguages.views.pageNotFound'
-
+handler404 = 'programmingLanguages.views.page_not_found'
 

@@ -6,6 +6,7 @@ import django.db.models
 from django.contrib.auth import logout, login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import *
+from django.template import loader, RequestContext
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -86,12 +87,12 @@ class LanguageInfoShow(DataMixin, DetailView):
         return dict(list(context.items()) + list(mixinContext.items()))
 
 
-def pageNotFound(request, exception):
-    return render(request, 'programmingLanguages/error.html', status=404)
+def page_not_found(request, exception=None):
+    return HttpResponseRedirect(redirect_to='../../../error')
 
 
-'''def error(request: django.core.handlers.wsgi.WSGIRequest) -> HttpResponse:
-    return render(request, 'programmingLanguages/error.html')'''
+def error(request: django.core.handlers.wsgi.WSGIRequest):
+    return render(request, 'programmingLanguages/error404.html')
 
 
 class AddLanguagePost(LoginRequiredMixin, DataMixin, CreateView):
