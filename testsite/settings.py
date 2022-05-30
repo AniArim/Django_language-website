@@ -166,7 +166,7 @@ STATICFILES_FINDERS = (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = Path.cwd()/'media'
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 
 THUMBNAIL_FORMAT = 'PNG'
 
