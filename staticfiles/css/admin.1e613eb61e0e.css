@@ -1,5 +1,5 @@
 body.dashboard,  #main{
-    background-image: url("https://img1.akspic.ru/attachments/crops/9/8/9/0/1/110989/110989-monoxromnyj_rejim-kamennaya_stena-tekstura-dizajn-dorozhnoe_pokrytie-3840x2160.jpg");
+    background-color: #151929;
     background-size: 100%;
     color: #bfbfe1;
 }
@@ -25,6 +25,7 @@ div.breadcrumbs {
     text-align: left;
 }
 :root{
+    --primary: #050000b8;
     --selected-row: #060000;
     --body-bg: #2401015e;
     --hairline-color: #d60404;
@@ -69,4 +70,13 @@ div.breadcrumbs {
 body.cke_editable.cke_editable_themed.cke_contents_ltr.cke_show_borders{
     color: #fffcfc;
     background-color: #0d0505;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=number], input[type=tel], textarea, select, .vTextField {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 5px 6px;
+    margin-top: 0;
+    color: var(--body-fg);
+    background-color: #240404;
 }

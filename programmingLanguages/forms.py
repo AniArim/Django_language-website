@@ -7,7 +7,7 @@ from .models import *
 
 
 class AddLanguagePost(forms.ModelForm):
-    #captcha = CaptchaField(label='Проверка', widget=CaptchaTextInput(attrs=({'class': 'captcha', 'id': 'id_captcha'})))
+    captcha = CaptchaField(label='Проверка' )
 
     class Meta:
         model = Language
@@ -26,7 +26,7 @@ class RegisterUserForm(UserCreationForm):
     first_name = forms.CharField(label='Никнейм', widget=forms.TextInput(attrs={'class': 'form-control'}))
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control-sm'}))
     password2 = forms.CharField(label='Повтор пароля', widget=forms.PasswordInput(attrs={'class': 'form-control-sm'}))
-    captcha = CaptchaField(label='Проверка', widget=CaptchaTextInput(attrs=({'class': 'captcha', 'id': 'id_captcha'})))
+    captcha = CaptchaField(label='Проверка')
 
     class Meta:
         model = User

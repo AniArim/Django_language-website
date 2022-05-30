@@ -1,0 +1,86 @@
+body.dashboard,  #main{
+    background-color: #151929;
+    background-size: 100%;
+    color: #bfbfe1;
+}
+#header, .module caption{
+    background-color: rgb(51, 8, 10);
+}
+
+#nav-sidebar {
+    z-index: 15;
+    flex: 0 0 275px;
+    left: -276px;
+    margin-left: -276px;
+    border-top: 1px solid transparent;
+    border-right: 1px solid #f4efef;
+    background-color: #390b3a4f;
+    overflow: auto;
+}
+div.breadcrumbs {
+    background: #7e0202;
+    padding: 10px 40px;
+    border: none;
+    color: #f4f6f8;
+    text-align: left;
+}
+:root{
+    --primary: #050000b8;
+    --selected-row: #060000;
+    --body-bg: #2401015e;
+    --hairline-color: #d60404;
+    --border-color: #f50000;
+    --error-fg: #f80202;
+    --message-error-bg: #090000;
+    --darkened-bg: #470000bf;
+    --close-button-bg: #a10505;
+    --header-link-color: #f90101;
+    --link-fg: #fcfeff;
+    --link-hover-color: #cc0303;
+    --link-selected-fg: #ebe495;
+    --selected-bg: #951d1d45;
+
+
+}
+
+
+#content-related {
+    float: right;
+    width: 260px;
+    position: relative;
+    margin-right: -700px;
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: #9b0000;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    color: var(--button-fg);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+    float: right;
+    border: none;
+    font-weight: 400;
+    background: #ac0404;
+}
+body.cke_editable.cke_editable_themed.cke_contents_ltr.cke_show_borders{
+    color: #fffcfc;
+    background-color: #0d0505;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=number], input[type=tel], textarea, select, .vTextField {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 5px 6px;
+    margin-top: 0;
+    color: var(--body-fg);
+    background-color: #240404;
+}
+
+.cke_reset_all, .cke_reset_all *, .cke_reset_all a, .cke_reset_all textarea {
+    color: white;
+}
