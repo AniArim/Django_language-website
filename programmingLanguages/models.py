@@ -29,7 +29,7 @@ class Language(models.Model):
 
     display_subcategory.short_description = 'Подкатегории'
 
-    def save(self, *args, **kwargs):
+    '''def save(self, *args, **kwargs):
 
         if not self.id:
             super(Language, self).save(*args, **kwargs)
@@ -41,7 +41,7 @@ class Language(models.Model):
             except:
                 date = datetime.today().strftime('%d-%m-%Y-%H-%M-%S_')
                 self.slug = f'{date}{slugify(self.title)}'
-                super(Language, self).save(*args, **kwargs)
+                super(Language, self).save(*args, **kwargs)'''
 
     class Meta:
         verbose_name = 'Язык программирования'
