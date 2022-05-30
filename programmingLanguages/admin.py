@@ -23,13 +23,13 @@ class PostAdminForm(forms.ModelForm):
 
 
 class LanguageAdmin(admin.ModelAdmin):
+    form = LanguageAdminForm
     list_display = ('title', 'id', 'get_html_logo', 'slug')
     list_display_links = ('id', 'title')
     search_fields = ('title',)
     list_filter = ('subcategories',)
     prepopulated_fields = {'slug': ('title',)}
-    form = LanguageAdminForm
-    fields = ('title', 'slug', 'subcategories', 'icon', 'get_html_logo', 'content')
+    fields = ('title', 'slug', 'icon', 'get_html_logo', 'content', 'subcategories')
     readonly_fields = ('get_html_logo',)
     save_on_top = True
     

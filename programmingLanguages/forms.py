@@ -7,11 +7,11 @@ from .models import *
 
 
 class AddLanguagePost(forms.ModelForm):
-    captcha = CaptchaField(label='Проверка', widget=CaptchaTextInput(attrs=({'class': 'captcha', 'id': 'id_captcha'})))
+    #captcha = CaptchaField(label='Проверка', widget=CaptchaTextInput(attrs=({'class': 'captcha', 'id': 'id_captcha'})))
 
     class Meta:
         model = Language
-        fields = ['title', 'subcategories', 'icon', 'content']
+        fields = ['title', 'icon', 'content', 'subcategories']
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите название языка:'}),

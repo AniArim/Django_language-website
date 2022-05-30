@@ -88,7 +88,8 @@ class LanguageInfoShow(DataMixin, DetailView):
 
 
 def page_not_found(request, exception=None):
-    return HttpResponseRedirect(redirect_to='../../../error')
+    #return HttpResponseRedirect(redirect_to='../../../error')
+    return render(request, 'programmingLanguages/error404.html')
 
 
 def error(request: django.core.handlers.wsgi.WSGIRequest):
@@ -96,9 +97,15 @@ def error(request: django.core.handlers.wsgi.WSGIRequest):
 
 
 class AddLanguagePost(LoginRequiredMixin, DataMixin, CreateView):
+
     form_class = AddLanguagePost
     template_name = 'programmingLanguages/addLang.html'
     login_url = 'login'
+
+    def form_valid(self, form):
+        form.save()
+        language_slug = Language.objects.get(title=form.cleaned_data.get('title'))
+        return redirect(f'show_language_info/{language_slug.slug}/')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
