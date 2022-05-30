@@ -38,13 +38,13 @@ if settings.DEBUG:
         path('__debug__/', include(debug_toolbar.urls)),
     ] + urlpatterns
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-else:
+'''else:
     urlpatterns += [
         re_path(f'^{settings.MEDIA_URL.lstrip("/")}(?P<path>.*)$',
             mediaserve, {'document_root': settings.MEDIA_ROOT}),
         re_path(f'^{settings.STATIC_URL.lstrip("/")}(?P<path>.*)$',
             mediaserve, {'document_root': settings.STATIC_ROOT})
-    ]
+    ]'''
 
 handler404 = 'programmingLanguages.views.page_not_found'
 
