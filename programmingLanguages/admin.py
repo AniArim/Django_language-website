@@ -24,7 +24,7 @@ class PostAdminForm(forms.ModelForm):
 
 class LanguageAdmin(admin.ModelAdmin):
     form = LanguageAdminForm
-    list_display = ('title', 'id', 'get_html_logo', 'slug')
+    list_display = ('title', 'id', 'get_html_logo', 'slug', 'display_subcategory')
     list_display_links = ('id', 'title')
     search_fields = ('title',)
     list_filter = ('subcategories',)
@@ -32,7 +32,7 @@ class LanguageAdmin(admin.ModelAdmin):
     fields = ('title', 'slug', 'icon', 'get_html_logo', 'content', 'subcategories')
     readonly_fields = ('get_html_logo',)
     save_on_top = True
-    
+
     def get_html_logo(self, language):
         if language.icon:
             return mark_safe(f"<img src='{language.icon.url}' width=70")

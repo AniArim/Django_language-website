@@ -21,7 +21,19 @@ class Language(models.Model):
         cache.clear()
         return reverse('show_language_info', kwargs={'idx': self.slug})
 
+    def display_subcategory(self):
+        """
+        Creates a string for the SubCategory. This is required to display subcategories in Admin.
+        """
+        return ';  '.join([subcategories.name for subcategories in self.subcategories.all()[:3]])
+
+    display_subcategory.short_description = 'Подкатегории'
+
     def save(self, *args, **kwargs):
+
+        if not self.id:
+            super(Language, self).save(*args, **kwargs)
+
         if not self.slug:
             try:
                 self.slug = slugify(self.title)
