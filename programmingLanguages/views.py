@@ -1,6 +1,7 @@
 from datetime import datetime
 
 import django.core.handlers.wsgi
+from django.core.cache import cache
 import django.urls
 import django.db.models
 from django.contrib.auth import logout, login
@@ -106,6 +107,7 @@ class AddLanguagePost(LoginRequiredMixin, DataMixin, CreateView):
 
     def form_valid(self, form):
         form.save()
+        cache.clear()
         language_object = Language.objects.get(title=form.cleaned_data.get('title'))
         try:
             Language.objects.get(slug=form.cleaned_data.get('slug'))
