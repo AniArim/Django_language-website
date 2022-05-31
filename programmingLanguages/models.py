@@ -6,7 +6,7 @@ from ckeditor.fields import RichTextField
 
 class Language(models.Model):
     title = models.CharField(max_length=255, db_index=True, verbose_name='Название')
-    slug = models.SlugField(max_length=100, unique=True, db_index=True, null=True, verbose_name='URL')
+    slug = models.SlugField(max_length=100, unique=True, db_index=True, null=False, verbose_name='URL')
     content = RichTextField(blank=True, verbose_name='Текст', config_name='awesome_ckeditor')
     icon = models.ImageField(upload_to='media', null=True, verbose_name='Изображение')
     subcategories = models.ManyToManyField('SubCategory', verbose_name='Категории')
