@@ -7,7 +7,7 @@ from .models import *
 
 
 class AddLanguagePost(forms.ModelForm):
-    captcha = CaptchaField(label='Проверка' )
+    captcha = CaptchaField(label='Проверка')
 
     class Meta:
         model = Language

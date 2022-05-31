@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 import django.core.handlers.wsgi
 import django.urls
@@ -12,6 +12,7 @@ from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 
+import programmingLanguages.models
 from .forms import *
 from .models import *
 from .utils import DataMixin
@@ -104,8 +105,14 @@ class AddLanguagePost(LoginRequiredMixin, DataMixin, CreateView):
 
     def form_valid(self, form):
         form.save()
-        language_slug = Language.objects.get(title=form.cleaned_data.get('title'))
-        return redirect(f'show_language_info/{language_slug.slug}/')
+        language_object = Language.objects.get(title=form.cleaned_data.get('title'))
+        try:
+            Language.objects.get(slug=form.cleaned_data.get('slug'))
+        except programmingLanguages.models.Language.DoesNotExist:
+            date = datetime.today().strftime('%d-%m-%Y-%H-%M-%S_')
+            language_object.slug = f'{date}{slugify(language_object.title)}'
+            language_object.save()
+        return redirect(f'show_language_info/{language_object.slug}/')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

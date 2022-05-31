@@ -1,10 +1,7 @@
-from datetime import datetime
 
 from django.db import models
 from django.urls import reverse
 from ckeditor.fields import RichTextField
-from django.utils.text import slugify
-from django.core.cache import cache
 
 
 class Language(models.Model):
@@ -18,7 +15,6 @@ class Language(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        cache.clear()
         return reverse('show_language_info', kwargs={'idx': self.slug})
 
     def display_subcategory(self):
@@ -28,20 +24,6 @@ class Language(models.Model):
         return ';  '.join([subcategories.name for subcategories in self.subcategories.all()[:3]])
 
     display_subcategory.short_description = 'Подкатегории'
-
-    '''def save(self, *args, **kwargs):
-
-        if not self.id:
-            super(Language, self).save(*args, **kwargs)
-
-        if not self.slug:
-            try:
-                self.slug = slugify(self.title)
-                super(Language, self).save(*args, **kwargs)
-            except:
-                date = datetime.today().strftime('%d-%m-%Y-%H-%M-%S_')
-                self.slug = f'{date}{slugify(self.title)}'
-                super(Language, self).save(*args, **kwargs)'''
 
     class Meta:
         verbose_name = 'Язык программирования'
