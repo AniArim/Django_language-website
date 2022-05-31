@@ -110,9 +110,13 @@ class AddLanguagePost(LoginRequiredMixin, DataMixin, CreateView):
         try:
             Language.objects.get(slug=form.cleaned_data.get('slug'))
         except programmingLanguages.models.Language.DoesNotExist:
-            date = datetime.today().strftime('%d-%m-%Y-%H-%M-%S_')
-            language_object.slug = f'{date}{slugify(language_object.title)}'
-            language_object.save()
+            try:
+                language_object.slug = slugify(language_object.title)
+                language_object.save()
+            except:
+                date = datetime.today().strftime('%d-%m-%Y-%H-%M-%S_')
+                language_object.slug = f'{date}{slugify(language_object.title)}'
+                language_object.save()
         return redirect(f'show_language_info/{language_object.slug}/')
 
     def get_context_data(self, **kwargs):
