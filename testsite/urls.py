@@ -21,6 +21,7 @@ from django.urls import path, include, re_path
 from django.conf.urls.static import static
 from django.conf import settings
 
+from programmingLanguages.views import LanguageAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +29,7 @@ urlpatterns = [
     path('martor/', include('martor.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('captcha/', include('captcha.urls')),
+    path('api/v1/langList/', LanguageAPIView.as_view())
 
 ]
 

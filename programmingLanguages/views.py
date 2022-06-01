@@ -17,7 +17,15 @@ from django.contrib.auth.views import LoginView, LogoutView
 import programmingLanguages.models
 from .forms import *
 from .models import *
+from .serializers import LanguageSerializer
 from .utils import DataMixin
+
+from rest_framework import generics
+
+
+class LanguageAPIView(generics.ListAPIView):
+    queryset = Language.objects.all()
+    serializer_class = LanguageSerializer
 
 
 class PostHome(DataMixin, ListView):
