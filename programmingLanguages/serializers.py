@@ -5,4 +5,4 @@ from .models import *
 class LanguageSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Language
-		fields = ('title', 'id', 'slug')
+		fields = ('title', 'id', 'slug', 'subcategories')
